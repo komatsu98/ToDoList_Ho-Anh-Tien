@@ -20,7 +20,7 @@
 $(document).ready(function() {
     // jQuery methods go here...
     $('#ss').focus();
-    $('#new').focus();
+    // $('#new').focus();
     var count = 0;
     var active = 0;
     var completed = 0;
@@ -154,7 +154,13 @@ $(document).ready(function() {
         reload_info();
     });
     $('#list').on("mouseenter", ".item", function() {
-        $(this).find('i').css('opacity', '0.5');
+        $(this).find('i').css('opacity', '0.2');
+        $(this).find('i').on("mouseenter", function() {
+            $(this).css('opacity','0.5');
+        });
+        $(this).find('i').on("mouseleave", function() {
+            $(this).css('opacity','0.2');
+        });
         // or $(this).children("i:first")
     });
     $('#list').on("mouseleave", ".item", function() {
@@ -168,8 +174,8 @@ $(document).ready(function() {
         });
         $(this).focus();
         // $(this).setCursorPosition(1);
-        $(this).css('outline-style', 'solid 1px');
-        $('#list .item span').keypress(function(e) {
+        // $(this).css('outline-style', 'solid 1px');
+        $(this).keypress(function(e) {
             if (e.which == 13) {
                 if ($(this).text() == "") {
                     $(this).parent().remove();
