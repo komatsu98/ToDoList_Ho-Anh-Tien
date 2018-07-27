@@ -1,4 +1,4 @@
 # ToDoList_Ho-Anh-Tien
 
 # Link
-[jquery](https://github.com/komatsu98/ToDoList_Ho-Anh-Tien/tree/master/jquery)
+[jquery](https://komatsu98.github.io/ToDoList_Ho-Anh-Tien/jquery/)
