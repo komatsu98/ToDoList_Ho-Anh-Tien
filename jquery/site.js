@@ -1,3 +1,22 @@
+// $.fn.selectRange = function(start, end) {
+//     if(end === undefined) {
+//         end = start;
+//     }
+//     return this.each(function() {
+//         if('selectionStart' in this) {
+//             this.selectionStart = start;
+//             this.selectionEnd = end;
+//         } else if(this.setSelectionRange) {
+//             this.setSelectionRange(start, end);
+//         } else if(this.createTextRange) {
+//             var range = this.createTextRange();
+//             range.collapse(true);
+//             range.moveEnd('character', end);
+//             range.moveStart('character', start);
+//             range.select();
+//         }
+//     });
+// };
 $(document).ready(function() {
     // jQuery methods go here...
     var count = 0;
@@ -49,25 +68,30 @@ $(document).ready(function() {
             $(this).parent().addClass("active");
             active += 1;
             completed = count - active;
+            $("#toggle-all").prop("checked", false);
             reload_info();
         }
     });
     $("#all").on("click", function() {
         $("div.item").each(function() {
-            $(this).removeClass('hide');
-            $(this).addClass('show');
+            // $(this).removeClass('hide');
+            // $(this).addClass('show');
+            $(this).removeClass('stt_a');
+            $(this).removeClass('stt_c');
         });
     });
     $("#active").on("click", function() {
         $("div.item").each(function() {
-            if ($(this).hasClass('completed')) {
-                $(this).removeClass('show');
-                $(this).addClass('hide');
-            }
-            if ($(this).hasClass('active')) {
-                $(this).removeClass('hide')
-                $(this).addClass('show');
-            }
+            // if ($(this).hasClass('completed')) {
+            //     $(this).removeClass('show');
+            //     $(this).addClass('hide');
+            // }
+            // if ($(this).hasClass('active')) {
+            //     $(this).removeClass('hide')
+            //     $(this).addClass('show');
+            // }
+            $(this).removeClass('stt_c');
+            $(this).addClass('stt_a');
         });
         if (active == 0) {
             $("#toggle-all").prop("checked", false);
@@ -75,14 +99,16 @@ $(document).ready(function() {
     });
     $("#completed").on("click", function() {
         $("div.item").each(function() {
-            if ($(this).hasClass('completed')) {
-                $(this).removeClass('hide');
-                $(this).addClass('show');
-            }
-            if ($(this).hasClass('active')) {
-                $(this).removeClass('show');
-                $(this).addClass('hide');
-            }
+            // if ($(this).hasClass('completed')) {
+            //     $(this).removeClass('hide');
+            //     $(this).addClass('show');
+            // }
+            // if ($(this).hasClass('active')) {
+            //     $(this).removeClass('show');
+            //     $(this).addClass('hide');
+            // }
+            $(this).removeClass('stt_a');
+            $(this).addClass('stt_c');
         });
         reload_info();
     });
@@ -133,8 +159,35 @@ $(document).ready(function() {
         $(this).find('i').css('opacity', '0');
         // or $(this).children("i:first")
     });
+    $('#list').on("dblclick", "div.item span", function() {
+        var th = this;
+        $(this).attr({
+            contenteditable: "true",
+        });
+        $(this).focus();
+        // $(this).setCursorPosition(1);
+        $(this).css('outline-style', 'solid 1px');
+        $('#list .item span').keypress(function(e) {
+            if (e.which == 13) {
+                if ($(this).text() == "") {
+                    $(this).parent().remove();
+                }
+                $(this).attr({
+                    contenteditable: "false",
+                });
+            };
+        });
+        $(this).click(function(event) {
+            event.stopPropagation();
+        });
+        $(document).click(function() {
+            $(th).attr({
+                contenteditable: "false",
+            });
+        });
+    });
     $('#footer').on("click", ".btn", function() {
-        $(this).parent().find("div.btn").each(function() {
+        $('#footer div.btn').each(function() {
             $(this).removeClass("active");
         });
         $(this).addClass("active");
