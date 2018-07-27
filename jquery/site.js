@@ -19,6 +19,8 @@
 // };
 $(document).ready(function() {
     // jQuery methods go here...
+    $('#ss').focus();
+    $('#new').focus();
     var count = 0;
     var active = 0;
     var completed = 0;
@@ -186,7 +188,7 @@ $(document).ready(function() {
             });
         });
     });
-    $('#footer').on("click", ".btn", function() {
+    $('#tri-btn').on("click", ".btn", function() {
         $('#footer div.btn').each(function() {
             $(this).removeClass("active");
         });
@@ -215,6 +217,11 @@ $(document).ready(function() {
         } else if (active == count) {
             $("#toggle-all").prop("checked", false);
             toggle_all = 0;
+        }
+        if (active < count) {
+            $('#clear').css('opacity', '1');
+        } else {
+            $('#clear').css('opacity', '0');
         }
     };
 });
