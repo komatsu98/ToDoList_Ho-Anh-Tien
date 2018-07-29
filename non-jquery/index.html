@@ -3,11 +3,10 @@
     <head>
         <meta charset="utf-8">
         </meta>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-        </script>
+
         <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" rel="stylesheet">
             <title>
-                Todos | Jquery
+                Todos | non-Jquery
             </title>
             <script src="site.js">
             </script>
@@ -17,7 +16,7 @@
             
         <link rel="stylesheet" href="css.css">
     </head>
-    <body>
+    <body onclick="body_click()">
         <!-- <a href="http://jquery.com/">
         </a> -->
         <div class="container">
@@ -25,10 +24,10 @@
                 todos
             </h1>
             <div class="header bordered">
-                <input id="toggle-all" type="checkbox">
+                <input id="toggle-all" type="checkbox" onclick="check_all(event)">
                 </input>
                 <div class="input" id="new">
-                    <input id="ss" name="content" placeholder="What needs to be done?" type="text"/>
+                    <input id="ss" name="content" placeholder="What needs to be done?" type="text" onkeypress="add(event)"/>
                 </div>
             </div>
             <div id="list">
@@ -45,20 +44,24 @@
                 <div id="info">
                 </div>
                 <div id="tri-btn">
-                    <div class="btn" id="all">
+                    <div class="btn" id="all" onclick="show_all(this)">
                         All
                     </div>
-                    <div class="btn" id="active">
+                    <div class="btn" id="active" onclick="show_active(this)">
                         Active
                     </div>
-                    <div class="btn" id="completed">
+                    <div class="btn" id="completed" onclick="show_completed(this)">
                         Completed
                     </div>
                 </div>
-                <div class="btn" id="clear">
+                <div class="btn" id="clear" onclick="clear_completed(this)">
                     Clear Completed
                 </div>
             </div>
         </div>
+    <script>
+        document.getElementById("ss").focus();
+        reload_info();
+    </script>
     </body>
 </html>
