@@ -12,6 +12,7 @@ Thực hiện bởi [Hồ Anh Tiến](https://github.com/komatsu98)
 [Mẫu](http://todomvc.com/examples/jquery/#/all)
 
 [jquery](https://komatsu98.github.io/ToDoList_Ho-Anh-Tien/jquery/)
+
 [non-jquery](https://komatsu98.github.io/ToDoList_Ho-Anh-Tien/non-jquery/)
 
 ## Kiến thức nắm được
