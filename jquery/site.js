@@ -22,14 +22,38 @@ $(document).ready(function() {
     $('#ss').focus();
     // $('#new').focus();
     var count = 0;
+    var max = 0;
     var active = 0;
     var completed = 0;
     var toggle_all = 0;
     reload_info();
+
+    function show_active(e) {
+        var els = document.getElementsByClassName('item');
+        for (var i = 0; i < els.length; i++) {
+            els[i].classList.remove('stt_c');
+            els[i].classList.add('stt_a');
+        }
+        if (active === 0) {
+            document.getElementById("toggle-all").checked = false;
+        }
+        reload_info();
+        active_tab(e);
+    }
+
+    function active_tab(el) {
+        var els = document.getElementsByClassName('btn');
+        for(var i = 0; i < els.length; i++){
+            els[i].classList.remove('active');
+        }
+        el.classList.add('active');
+    }
+
     $('#new').keypress(function(e) {
         if (e.which == 13 && $("input[name='content']").val() != "") {
             // var new_text = $("#ss").val();
             count++;
+            max++;
             active++;
             $("#toggle-all").prop("checked", false);
             reload_info();
@@ -38,15 +62,15 @@ $(document).ready(function() {
             // var new_item = document.createElement("div");
             $('<div></div>').attr({
                 class: 'item active',
-                id: count
+                id: max
             }).appendTo($('#list'));
             // new_item.addClass('item');
             // // new_item.addClass("item");
             $('<input/>').attr({
                 type: 'checkbox',
-            }).appendTo("#" + count);
+            }).appendTo("#" + max);
             // console.log($("input[name='content']").val());
-            $('<span>' + $("input[name='content']").val() + '</span>').attr({}).appendTo("#" + count);
+            $('<span>' + $("input[name='content']").val() + '</span>').attr({}).appendTo("#" + max);
             // $('<span></span>').appendTo(new_item);
             // var text = document.createTextNode(new_text);
             // console.log(new_item);
@@ -54,8 +78,9 @@ $(document).ready(function() {
             $('<i aria-hidden: "true"></i>').attr({
                 class: "fa fa-times",
                 name: "close"
-            }).appendTo("#" + count);
+            }).appendTo("#" + max);
             $("input[name='content']").val("");
+            show_active(document.getElementById('active'));
         }
     });
     $("#list").on("click", ".item input", function() {
